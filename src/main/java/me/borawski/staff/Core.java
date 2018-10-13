@@ -50,7 +50,7 @@ public class Core extends Plugin {
         staffChat = new ArrayList<>();
 
         mongo = new Mongo();
-        mySQL = new MySQL("localhost", 3306, "staffcore", "root", "password");
+        mySQL = new MySQL("localhost", 3306, "staffcore", "root", "B1VSGVCb");
         try {
             mySQL.update(
                     "CREATE TABLE IF NOT EXISTS sp_keys(" +
