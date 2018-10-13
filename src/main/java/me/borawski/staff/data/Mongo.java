@@ -1,9 +1,12 @@
 package me.borawski.staff.data;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+
+import java.util.ArrayList;
 
 public class Mongo {
 
@@ -15,7 +18,11 @@ public class Mongo {
 
     public Mongo() {
         morphia = new Morphia();
-        mongoClient = new MongoClient(new ServerAddress("192.99.15.171", 27017));
+        mongoClient = new MongoClient(new ServerAddress("192.99.15.171", 27017), new ArrayList<MongoCredential>() {
+            {
+                this.add(MongoCredential.createMongoCRCredential("root", DATABASE_NAME, "password".toCharArray()));
+            }
+        });
         datastore = morphia.createDatastore(mongoClient, DATABASE_NAME);
     }
 
