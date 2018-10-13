@@ -15,7 +15,7 @@ public class Mongo {
 
     public Mongo() {
         morphia = new Morphia();
-        mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+        mongoClient = new MongoClient(new ServerAddress("192.99.15.171", 27017));
         datastore = morphia.createDatastore(mongoClient, DATABASE_NAME);
     }
 
