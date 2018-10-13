@@ -20,7 +20,7 @@ public class Mongo {
         morphia = new Morphia();
         mongoClient = new MongoClient(new ServerAddress("192.99.15.171", 27017), new ArrayList<MongoCredential>() {
             {
-                this.add(MongoCredential.createMongoCRCredential("root", DATABASE_NAME, "password".toCharArray()));
+                this.add(MongoCredential.createMongoCRCredential("netcore", DATABASE_NAME, "B1VSGVCb".toCharArray()));
             }
         });
         datastore = morphia.createDatastore(mongoClient, DATABASE_NAME);
