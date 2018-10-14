@@ -7,6 +7,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Mongo {
 
@@ -14,15 +15,17 @@ public class Mongo {
     private MongoClient mongoClient;
     private Datastore datastore;
 
-    private final String DATABASE_NAME = "netcore";
+    private final String DATABASE_NAME = "THC-Perms";
 
     public Mongo() {
         morphia = new Morphia();
-        mongoClient = new MongoClient(new ServerAddress("192.99.15.171", 27017), new ArrayList<MongoCredential>() {
-            {
-                this.add(MongoCredential.createMongoCRCredential("netcore", DATABASE_NAME, "B1VSGVCb".toCharArray()));
-            }
-        });
+
+        ServerAddress address = new ServerAddress("192.99.15.171", 27017);
+
+        List<MongoCredential> credentialList = new ArrayList<>();
+        credentialList.add(MongoCredential.createMongoCRCredential("THC-Perms", DATABASE_NAME, "q5mEM7EmVSUFTGvq".toCharArray()));
+
+        mongoClient = new MongoClient(address, credentialList);
         datastore = morphia.createDatastore(mongoClient, DATABASE_NAME);
     }
 

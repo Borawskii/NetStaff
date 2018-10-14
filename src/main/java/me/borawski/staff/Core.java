@@ -61,8 +61,8 @@ public class Core extends Plugin {
             mySQL.update(
                     "CREATE TABLE IF NOT EXISTS sp_keys(" +
                             "ID INT NOT NULL AUTO_INCREMENT," +
-                            "uuid VARCHAR," +
-                            "s_key VARCHAR," +
+                            "uuid VARCHAR(36)," +
+                            "s_key VARCHAR(8)," +
                             "used BOOLEAN," +
                             "PRIMARY KEY(ID)" +
                             ");"
