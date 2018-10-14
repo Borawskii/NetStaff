@@ -1,7 +1,10 @@
 package me.borawski.staff;
 
 import me.borawski.staff.command.CommandHandler;
+import me.borawski.staff.command.punishment.KickCommand;
+import me.borawski.staff.command.punishment.MuteCommand;
 import me.borawski.staff.command.staff.StaffChatCommand;
+import me.borawski.staff.command.staff.StaffPanelCommand;
 import me.borawski.staff.command.utility.SayCommand;
 import me.borawski.staff.command.utility.WhoIsCommand;
 import me.borawski.staff.data.Mongo;
@@ -43,6 +46,9 @@ public class Core extends Plugin {
         commandHandler.add("staffchat", new StaffChatCommand());
         commandHandler.add("say", new SayCommand());
         commandHandler.add("whois", new WhoIsCommand());
+        commandHandler.add("kick", new KickCommand());
+        commandHandler.add("mute", new MuteCommand());
+        commandHandler.add("login", new StaffPanelCommand());
         commandHandler.registerCommands();
 
         getProxy().getPluginManager().registerListener(this, new PlayerChatEvent());
@@ -56,7 +62,7 @@ public class Core extends Plugin {
                     "CREATE TABLE IF NOT EXISTS sp_keys(" +
                             "ID INT NOT NULL AUTO_INCREMENT," +
                             "uuid VARCHAR," +
-                            "key VARCHAR," +
+                            "s_key VARCHAR," +
                             "used BOOLEAN," +
                             "PRIMARY KEY(ID)" +
                             ");"

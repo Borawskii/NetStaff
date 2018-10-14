@@ -9,7 +9,7 @@ public class SayCommand implements Command {
 
     @Override
     public String getPermission() {
-        return "hexcore.say";
+        return "hexcore.broadcast";
     }
 
     @Override

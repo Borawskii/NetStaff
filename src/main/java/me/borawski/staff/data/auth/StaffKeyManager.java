@@ -22,7 +22,7 @@ public class StaffKeyManager {
     public boolean hasKey(UUID uuid) {
         try {
             ResultSet set = getInstance().getMySQL().query(
-                    "SELECT key FROM sp_keys WHERE uuid='" + uuid.toString().replace("-", "") + "';"
+                    "SELECT s_key FROM sp_keys WHERE uuid='" + uuid.toString().replace("-", "") + "';"
             );
 
             return set.next();
@@ -49,11 +49,11 @@ public class StaffKeyManager {
     public String getKey(UUID uuid) {
         try {
             ResultSet set = getInstance().getMySQL().query(
-                    "SELECT key FROM sp_keys WHERE uuid='" + uuid.toString().replace("-", "") + "';"
+                    "SELECT s_key FROM sp_keys WHERE uuid='" + uuid.toString().replace("-", "") + "';"
             );
 
             while(set.next()) {
-                return set.getString("key");
+                return set.getString("s_key");
             }
         } catch (SQLException e) {
             e.printStackTrace();
