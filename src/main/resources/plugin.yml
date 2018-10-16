@@ -9,5 +9,5 @@ commands:
   staffchat:
   login:
   whois:
-  broadcast:
-    aliases: [say]
+  say:
+    aliases: [broadcast]

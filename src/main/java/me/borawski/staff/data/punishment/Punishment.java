@@ -98,4 +98,6 @@ public abstract class Punishment {
      * @param uuid
      */
     public abstract void action(UUID uuid);
+
+    public abstract String getType();
 }

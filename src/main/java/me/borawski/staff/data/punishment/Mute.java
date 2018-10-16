@@ -22,9 +22,14 @@ public class Mute extends Punishment {
         player.sendMessage(getPrefix() + ChatColor.GREEN + "Reason: " + ChatColor.YELLOW + getReason());
         player.sendMessage(getPrefix() + ChatColor.GREEN + "Time: " + ChatColor.YELLOW + getDate());
         player.sendMessage(getPrefix() + ChatColor.GREEN + "Until: " + ChatColor.YELLOW + (permanent?"Forever":until));
-        player.sendMessage(getPrefix() + ChatColor.GREEN + "Issuer: " + ChatColor.YELLOW + getPunisher());
+        //player.sendMessage(getPrefix() + ChatColor.GREEN + "Issuer: " + ChatColor.YELLOW + getPunisher());
 
         Core.getInstance().getPunishmentManager().getActiveMutes().put(uuid, this);
+    }
+
+    @Override
+    public String getType() {
+        return "mute";
     }
 
     public boolean isPermanent() {

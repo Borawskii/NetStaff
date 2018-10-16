@@ -3,9 +3,13 @@ package me.borawski.staff.command.punishment;
 import me.borawski.staff.Core;
 import me.borawski.staff.command.Command;
 import me.borawski.staff.data.punishment.Mute;
+import me.borawski.staff.data.punishment.Punishment;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MuteCommand implements Command {
     @Override
@@ -36,6 +40,27 @@ public class MuteCommand implements Command {
         }
 
         String user = args[0];
+        final boolean[] currentlyMuted = {false};
+
+        if(Core.getInstance().getProxy().getPlayer(user) == null) {
+            sender.sendMessage(ChatColor.RED + "Player is not online!");
+            return;
+        }
+
+        List<Punishment> punishments = (List<Punishment>) Core.getInstance().getPunishmentManager().getPunishmentHistory(Core.getInstance().getProxy().getPlayer(user).getUniqueId());
+        punishments.forEach((p) -> {
+            if(p.getType().equalsIgnoreCase("mute")) {
+                if(!p.isPardoned()) {
+                    currentlyMuted[0] = true;
+                }
+            }
+        });
+
+        if(currentlyMuted[0]) {
+            sender.sendMessage(ChatColor.RED + "That player is currently muted!");
+            return;
+        }
+
         String until = args[1];
 
         Mute mute = new Mute();
@@ -85,7 +110,14 @@ public class MuteCommand implements Command {
         mute.setReason(reason.toString());
         mute.setPardoned(false);
 
+        mute.setEvidence(new ArrayList<String>() {
+            {
+                this.add("[Evidence for mute goes here]");
+            }
+        });
+
         Core.getInstance().getPunishmentManager().savePunishment(mute);
+        mute.action(Core.getInstance().getProxy().getPlayer(user).getUniqueId());
 
     }
 }

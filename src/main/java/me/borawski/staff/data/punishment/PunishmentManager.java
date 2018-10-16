@@ -37,8 +37,8 @@ public class PunishmentManager {
         System.out.println("Received and saved punishment: " + punishment.getId());
     }
 
-    public List getPunishmentHistory(UUID uuid) {
-        Query query = getMongo().getDatastore().createQuery(Punishment.class)
+    public List<Punishment> getPunishmentHistory(UUID uuid) {
+        Query<Punishment> query = getMongo().getDatastore().createQuery(Punishment.class)
                 .filter("target", uuid);
         return query.asList();
     }

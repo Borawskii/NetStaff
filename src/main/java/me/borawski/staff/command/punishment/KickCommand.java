@@ -7,6 +7,8 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import java.util.ArrayList;
+
 public class KickCommand implements Command {
 
     @Override
@@ -36,12 +38,21 @@ public class KickCommand implements Command {
             ProxiedPlayer targetPlayer = Core.getInstance().getProxy().getPlayer(target);
 
             Kick kick = new Kick();
+
+            kick.setDate(System.currentTimeMillis());
+
             kick.setTarget(Core.getInstance().getProxy().getPlayer(target).getUniqueId());
             kick.setPunisher(targetPlayer.getUniqueId());
-
             kick.setPardoned(true);
+            kick.setEvidence(new ArrayList<String>() {
+                {
+                    this.add("[Evidence for kick goes here]");
+                }
+            });
 
             Core.getInstance().getPunishmentManager().savePunishment(kick);
+
+            kick.action(targetPlayer.getUniqueId());
         }
 
     }

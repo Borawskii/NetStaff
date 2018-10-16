@@ -15,7 +15,7 @@ public class Mongo {
     private MongoClient mongoClient;
     private Datastore datastore;
 
-    private final String DATABASE_NAME = "THC-Perms";
+    private final String DATABASE_NAME = "netcore";
 
     public Mongo() {
         morphia = new Morphia();
@@ -25,7 +25,7 @@ public class Mongo {
         List<MongoCredential> credentialList = new ArrayList<>();
         credentialList.add(MongoCredential.createMongoCRCredential("THC-Perms", DATABASE_NAME, "q5mEM7EmVSUFTGvq".toCharArray()));
 
-        mongoClient = new MongoClient(address, credentialList);
+        mongoClient = new MongoClient(address);
         datastore = morphia.createDatastore(mongoClient, DATABASE_NAME);
     }
 

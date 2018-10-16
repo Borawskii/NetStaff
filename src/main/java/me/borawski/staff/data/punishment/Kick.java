@@ -27,9 +27,13 @@ public class Kick extends Punishment {
                         + ChatColor.DARK_RED + "You have been kicked!\n"
                         + "\n"
                         + ChatColor.RED + "Player: " + ChatColor.YELLOW + Core.getInstance().getProxy().getPlayer(uuid).getName() + "\n"
-                        + ChatColor.RED + "Staff Member: " + ChatColor.YELLOW + Core.getInstance().getProxy().getPlayer(getPunisher()).getName() + "\n"
                         + ChatColor.RED + "Reason: " + ChatColor.GRAY + getReason() + "\n"
                         + ChatColor.RED + "-------------------"
         );
+    }
+
+    @Override
+    public String getType() {
+        return "kick";
     }
 }

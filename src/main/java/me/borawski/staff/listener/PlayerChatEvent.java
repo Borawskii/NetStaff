@@ -27,6 +27,10 @@ public class PlayerChatEvent implements Listener {
                 return;
 
             } else {
+                if(event.getMessage().startsWith("/")) {
+                    return;
+                }
+
                 event.setCancelled(true);
 
                 String prefix = ChatColor.DARK_RED + "" + ChatColor.BOLD + "STAFF | " + ChatColor.RESET + "" + ChatColor.GRAY;
@@ -34,7 +38,7 @@ public class PlayerChatEvent implements Listener {
                 player.sendMessage(prefix + ChatColor.GREEN + "Reason: " + ChatColor.YELLOW + mute.getReason());
                 player.sendMessage(prefix + ChatColor.GREEN + "Time: " + ChatColor.YELLOW + mute.getDate());
                 player.sendMessage(prefix + ChatColor.GREEN + "Until: " + ChatColor.YELLOW + (mute.isPermanent()?"Forever":mute.getUntil()));
-                player.sendMessage(prefix + ChatColor.GREEN + "Issuer: " + ChatColor.YELLOW + mute.getPunisher());
+                //player.sendMessage(prefix + ChatColor.GREEN + "Issuer: " + ChatColor.YELLOW + mute.getPunisher());
                 return;
 
             }
@@ -42,9 +46,17 @@ public class PlayerChatEvent implements Listener {
         }
 
         if (Core.getInstance().getStaffChat().contains(player.getUniqueId())) {
+            if(event.getMessage().startsWith("/")) {
+                return;
+            }
+
             event.setCancelled(true);
-            Core.getInstance().getStaffChat().forEach((s) -> {
-                Core.getInstance().getProxy().getPlayer(s).sendMessage(
+            Core.getInstance().getProxy().getPlayers().forEach((s) -> {
+                if(!s.hasPermission("hexcore.staff")) {
+                    return;
+                }
+
+                s.sendMessage(
                         Core.getInstance().getCommandHandler().getCommandMap().get("staffchat").getPrefix()
                                 + ChatColor.RED + player.getName() + "" + ChatColor.DARK_GRAY + " ➡ " + ChatColor.GRAY
                                 + event.getMessage()
